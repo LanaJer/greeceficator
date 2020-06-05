@@ -14,8 +14,12 @@ bot.
 """
 
 import logging
+import os
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+
+from dotenv import load_dotenv
+load_dotenv()
 
 # Enable logging
 from greeceficator import greeceficator_vowels, greeceficator_consonants
@@ -56,7 +60,7 @@ def main():
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater("", use_context=True)
+    updater = Updater(os.getenv("BOT_TOKEN"), use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
