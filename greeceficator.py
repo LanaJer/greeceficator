@@ -1,13 +1,14 @@
 
-def greeceficator(text: str):
-    """Перевод с русского на греческий."""
+def greeceficator_vowels(text: str):
+    """Транслитерация гласных букв с русского на греческий."""
     lower_vowels = {
         'а': 'α',
         'о': 'ω',
-        'э': 'αι',
+        'э': 'ε',
         'и': 'οι',
         'у': 'ου',
         'я': 'για',
+        'ю':'υ',
     }
     caps_vowels = {k.capitalize(): v.capitalize() for k, v in lower_vowels.items()}
 
@@ -19,8 +20,43 @@ def greeceficator(text: str):
     return text
 
 
+def greeceficator_consonants(text: str):
+    """Транслитерация согласных букв с русского на греческий."""
+    lower_consonants = {
+        'б': 'β',
+        'в': 'β',
+        'г': 'γ',
+        'д': 'δ',
+        'з': 'ζ',
+        'тф': 'θ',
+        'к':'κ',
+        'л':'λ',
+        'м':'μ',
+        'н':'ν',
+        'кс':'ξ',
+        'п':'π',
+        'р':'ρ',
+        'с':'σ',
+        'т':'τ',
+        'ф':'φ',
+        'х':'χ',
+        'пс':'ψ',
+    }
+    caps_consonants = {k.capitalize(): v.capitalize() for k, v in lower_consonants.items()}
+
+    substitutions = {**lower_consonants, **caps_consonants}  # объединяет два словаря
+
+    for key, value in substitutions.items():
+        text = text.replace(key, value)
+    if key == 'тф':
+        value = 'θ'
+
+    return text
+
+
+
 if __name__ == '__main__':
     # text = input('Please enter smth: ')
-    text = 'Яблоко висит на ветке. Кэб приехал в Лондон.'
-    text = greeceficator(text)
+    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Тф'
+    text = greeceficator_vowels(text) and greeceficator_consonants(text)
     print(text)
