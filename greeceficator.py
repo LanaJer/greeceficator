@@ -14,10 +14,14 @@ def greeceficator_vowels(text: str):
 
     substitutions = {**lower_vowels, **caps_vowels}  # объединяет два словаря
 
-    for key, value in substitutions.items():
+    for key, value in sorted(substitutions.items(), reverse=True, key=get_key_len):
         text = text.replace(key, value)
 
     return text
+
+def get_key_len(x):
+    """Возвращает длину ключа."""
+    return len(x[0])
 
 
 def greeceficator_consonants(text: str):
@@ -46,11 +50,8 @@ def greeceficator_consonants(text: str):
 
     substitutions = {**lower_consonants, **caps_consonants}  # объединяет два словаря
 
-    for key, value in substitutions.items():
+    for key, value in sorted(substitutions.items(), reverse=True, key=get_key_len):
         text = text.replace(key, value)
-    if key == 'тф':
-        value = 'θ'
-
     return text
 
 
@@ -58,5 +59,6 @@ def greeceficator_consonants(text: str):
 if __name__ == '__main__':
     # text = input('Please enter smth: ')
     text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Тф'
-    text = greeceficator_vowels(text) and greeceficator_consonants(text)
+    text = greeceficator_vowels(text)
+    text = greeceficator_consonants(text)
     print(text)
