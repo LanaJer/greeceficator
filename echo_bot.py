@@ -39,7 +39,13 @@ def start(update, context):
 
 def help(update, context):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    text = (
+        "Команды:\n"
+        "/help - справка\n"
+        "/caps <текст> - все БОЛЬШИМИ буквами\n"
+        "/lower <текст> - все маленькими буквами\n"
+    )
+    update.message.reply_text(text)
 
 
 def echo(update, context):
@@ -48,6 +54,22 @@ def echo(update, context):
     text = greeceficator_vowels(text)
     text = greeceficator_consonants(text)
     update.message.reply_text(text)
+
+
+def caps(update, context):
+    """Echo the user message."""
+    text = update.message.text
+    text = greeceficator_vowels(text)
+    text = greeceficator_consonants(text)
+    update.message.reply_text(text.upper())
+
+
+def lower(update, context):
+    """Echo the user message."""
+    text = update.message.text
+    text = greeceficator_vowels(text)
+    text = greeceficator_consonants(text)
+    update.message.reply_text(text.lower())
 
 
 def error(update, context):
@@ -68,6 +90,8 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("caps", caps))
+    dp.add_handler(CommandHandler("lower", lower))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
