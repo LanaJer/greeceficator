@@ -24,11 +24,14 @@ load_dotenv()
 # Enable logging
 from greeceficator import greeceficator_vowels, greeceficator_consonants
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s - %(funcName)s - %(levelname)s - %(message)s',
+    level=logging.INFO,
+    filename='bot.log'
+)
 
 logger = logging.getLogger(__name__)
-
+logger.addHandler(logging.StreamHandler())
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
@@ -51,6 +54,7 @@ def help(update, context):
 def echo(update, context):
     """Echo the user message."""
     text = update.message.text
+    logger.info(text)
     text = greeceficator_vowels(text)
     text = greeceficator_consonants(text)
     update.message.reply_text(text)
@@ -59,6 +63,7 @@ def echo(update, context):
 def caps(update, context):
     """Echo the user message."""
     text = update.message.text
+    logger.info(text)
     text = greeceficator_vowels(text)
     text = greeceficator_consonants(text)
     update.message.reply_text(text.upper())
@@ -67,6 +72,7 @@ def caps(update, context):
 def lower(update, context):
     """Echo the user message."""
     text = update.message.text
+    logger.info(text)
     text = greeceficator_vowels(text)
     text = greeceficator_consonants(text)
     update.message.reply_text(text.lower())
@@ -98,6 +104,7 @@ def main():
 
     # log all errors
     dp.add_error_handler(error)
+    logger.warning('Bot started')
 
     # Start the Bot
     updater.start_polling()
