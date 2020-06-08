@@ -55,7 +55,6 @@ def greeceficator_consonants(text: str):
     return text
 
 
-
 if __name__ == '__main__':
     # text = input('Please enter smth: ')
     text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Тф'
