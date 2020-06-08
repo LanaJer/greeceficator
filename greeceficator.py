@@ -1,7 +1,10 @@
+from string import punctuation
+
 from utils import find_with_context, replace_first
 
-ANY_LETTER = 'αβγδεζηθικλμνξοπρςστυφχψω'
-NO_LETTER = ' \n'
+
+ANY_LETTER = 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρςστυφχψω'  # все греческие буквы
+NO_LETTER = ' \t\n\r\x0b\x0c' + punctuation  # все варианты пробелов и все символы пунктуации
 ANY = ''
 
 
@@ -32,51 +35,60 @@ def get_key_len(x):
 
 def greeceficator_consonants(text: str):
     """Транслитерация согласных букв с русского на греческий."""
-    lower_consonants = {
-        'мп': (ANY_LETTER, 'μπ', ANY_LETTER),
-        'мб': (ANY_LETTER, 'μπ', ANY_LETTER),
-        'б': (NO_LETTER, 'μπ', ANY),
-        'в': (ANY,  'β', ANY),
-        'г': (ANY,  'γ', ANY),
-        'д': (ANY,  'δ', ANY),
-        'з': (ANY,  'ζ', ANY),
-        'тф': (ANY,  'θ', ANY),
-        'к': (ANY, 'κ', ANY),
-        'л': (ANY, 'λ', ANY),
-        'м': (ANY, 'μ', ANY),
-        'н': (ANY, 'ν', ANY),
-        'кс': (ANY, 'ξ', ANY),
-        'п': (ANY, 'π', ANY),
-        'р': (ANY, 'ρ', ANY),
-        'с': (ANY, 'σ', ANY),
-        'т': (ANY, 'τ', ANY),
-        'ф': (ANY, 'φ', ANY),
-        'х': (ANY, 'χ', ANY),
-        'пс': (ANY, 'ψ', ANY),
-    }
-    # caps_consonants = {k.capitalize(): v[1].capitalize() for k, v in lower_consonants.items()}
+    lower_consonants = [
+        ('мп', 'μπ', ANY_LETTER, ANY_LETTER),
+        ('мб', 'μπ', ANY_LETTER, ANY_LETTER),
+        ('кс', 'ξ', ANY, ANY),
+        ('тф', 'θ', ANY, ANY),
+        ('ъе', 'γι', ANY, ANY),
+        ('б',  'μπ', NO_LETTER, ANY_LETTER),
+        ('в',  'β', ANY, ANY),
+        ('г',  'γ', ANY, ANY),
+        ('д',  'δ', ANY, ANY),
+        ('з',  'ζ', ANY, ANY),
+        ('к',  'κ', ANY, ANY),
+        ('л',  'λ', ANY, ANY),
+        ('м',  'μ', ANY, ANY),
+        ('н',  'ν', ANY, ANY),
+        ('п',  'π', ANY, ANY),
+        ('р',  'ρ', ANY, ANY),
+        ('с',  'σ', ANY, ANY),
+        ('т',  'τ', ANY, ANY),
+        ('ф',  'φ', ANY, ANY),
+        ('х',  'χ', ANY, ANY),
+        ('пс', 'ψ', ANY, ANY),
+    ]
+    caps_consonants = [(x[0].capitalize(), x[1].capitalize(), x[2], x[3]) for x in lower_consonants]
 
-    substitutions = {**lower_consonants}  # объединяет два словаря
+    substitutions = [*caps_consonants, *lower_consonants]  # объединяет два списка
 
-    for key, values in substitutions.items():
-        before, replace, after = values
+    for rus_char, greek_char, allowed_before, allowed_after in substitutions:
 
-        index, char_before, char_after = find_with_context(text, key)
+        index, char_before, char_after = find_with_context(text, rus_char)
         while index != -1:
-
-            if before == ANY and after == ANY:
-                text = replace_first(text, key, replace)
+            # Разрешен любой контекст
+            if allowed_before == ANY and allowed_after == ANY:
+                text = replace_first(text, rus_char, greek_char)
+            # Ограничение по символам до
+            elif char_before in allowed_before and allowed_after == ANY:
+                text = replace_first(text, rus_char, greek_char)
+            # Ограничение по символам после
+            elif allowed_before == ANY and char_after in allowed_after:
+                text = replace_first(text, rus_char, greek_char)
+            # Ограничение по символам до и после
+            elif char_before in allowed_before and char_after in allowed_after:
+                text = replace_first(text, rus_char, greek_char)
             else:
-                break
+                break  # Нечего менять - завершаем while и переходим к следующей букве (цикл for)
 
-            index, char_before, char_after = find_with_context(text, key)
+            index, char_before, char_after = find_with_context(text, rus_char)
 
     return text
 
 
 if __name__ == '__main__':
     # text = input('Please enter smth: ')
-    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. б'
+    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Бурундук съел бомбу.'
     text = greeceficator_vowels(text)
     text = greeceficator_consonants(text)
     print(text)
