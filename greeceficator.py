@@ -48,6 +48,7 @@ def greeceficator_consonants(text: str):
         ('нт', 'ντ', ANY, ANY),
         ('нд', 'ντ', ANY, ANY),
         ('аф', 'αυ', ANY, ANY),
+        ('ни', 'νι', ANY, ANY),
         ('д', 'ντ', NO_LETTER, ANY),
         ('б',  'μπ', NO_LETTER, ANY_LETTER),
         ('в',  'β', ANY, ANY),
