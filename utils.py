@@ -4,7 +4,10 @@ def find_with_context(text: str, search: str):
     if index == -1:
         return index, '', ''
     char_before = text[index - 1]
-    char_after = text[index + len(search)]
+    try:
+        char_after = text[index + len(search)]
+    except IndexError:
+        char_after = ''
     return index, char_before, char_after
 
 
@@ -19,5 +22,5 @@ def replace_first(text: str, search: str, replace: str):
 if __name__ == '__main__':
     # text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Тф'
     # print(find_with_context(text, 'ppp'))
-    text = 'Яблоко висит на ветке. Яблоко висит на ветке. Кэб приехал в Лондон. Тф'
+    text = 'Яблоко висит на ветке. Яблоко висит на ветке. Кэб приехал в Лондон. б'
     print(replace_first(text, 'висит', 'сидит'))
