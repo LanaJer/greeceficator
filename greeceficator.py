@@ -3,7 +3,9 @@ from string import punctuation
 from utils import find_with_context, replace_first
 
 
-ANY_LETTER = 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρςστυφχψω'  # все греческие буквы
+ANY_LETTER_GR = 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρςστυφχψω'
+ANY_LETTER_RU = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя'
+ANY_LETTER = ANY_LETTER_RU + ANY_LETTER_GR
 NO_LETTER = ' \t\n\r\x0b\x0c' + punctuation  # все варианты пробелов и все символы пунктуации
 ANY = ''
 
@@ -39,8 +41,14 @@ def greeceficator_consonants(text: str):
         ('мп', 'μπ', ANY_LETTER, ANY_LETTER),
         ('мб', 'μπ', ANY_LETTER, ANY_LETTER),
         ('кс', 'ξ', ANY, ANY),
+        ('пс', 'ψ', ANY, ANY),
+        ('дз', 'τζ', ANY, ANY),
         ('тф', 'θ', ANY, ANY),
         ('ъе', 'γι', ANY, ANY),
+        ('нт', 'ντ', ANY, ANY),
+        ('нд', 'ντ', ANY, ANY),
+        ('аф', 'αυ', ANY, ANY),
+        ('д', 'ντ', NO_LETTER, ANY),
         ('б',  'μπ', NO_LETTER, ANY_LETTER),
         ('в',  'β', ANY, ANY),
         ('г',  'γ', ANY, ANY),
@@ -56,7 +64,7 @@ def greeceficator_consonants(text: str):
         ('т',  'τ', ANY, ANY),
         ('ф',  'φ', ANY, ANY),
         ('х',  'χ', ANY, ANY),
-        ('пс', 'ψ', ANY, ANY),
+
     ]
     caps_consonants = [(x[0].capitalize(), x[1].capitalize(), x[2], x[3]) for x in lower_consonants]
 
