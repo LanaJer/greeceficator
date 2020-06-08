@@ -55,8 +55,8 @@ def echo(update, context):
     """Echo the user message."""
     text = update.message.text
     logger.info(text)
-    text = greeceficator_vowels(text)
     text = greeceficator_consonants(text)
+    text = greeceficator_vowels(text)
     update.message.reply_text(text)
 
 
@@ -64,8 +64,8 @@ def caps(update, context):
     """Echo the user message."""
     text = update.message.text
     logger.info(text)
-    text = greeceficator_vowels(text)
     text = greeceficator_consonants(text)
+    text = greeceficator_vowels(text)
     update.message.reply_text(text.upper())
 
 
@@ -73,8 +73,8 @@ def lower(update, context):
     """Echo the user message."""
     text = update.message.text
     logger.info(text)
-    text = greeceficator_vowels(text)
     text = greeceficator_consonants(text)
+    text = greeceficator_vowels(text)
     update.message.reply_text(text.lower())
 
 
