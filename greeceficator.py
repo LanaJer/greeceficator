@@ -40,6 +40,7 @@ def greeceficator_consonants(text: str):
     lower_consonants = [
         ('б', 'μπ', NO_LETTER, ANY_LETTER),
         ('д', 'ντ', NO_LETTER, ANY),
+        ('о', 'ο', NO_LETTER, ANY),
         ('оло', 'ολω', ANY_LETTER, ANY_LETTER),
         ('ожо', 'οζο', ANY_LETTER, ANY_LETTER),
         ('иси', 'ιση', ANY_LETTER, ANY_LETTER),
@@ -70,6 +71,7 @@ def greeceficator_consonants(text: str):
         ('т',  'τ', ANY, ANY),
         ('ф',  'φ', ANY, ANY),
         ('х',  'χ', ANY, ANY),
+        ('ч', 'τσ', ANY, ANY),
 
     ]
 
@@ -103,7 +105,7 @@ def greeceficator_consonants(text: str):
 
 if __name__ == '__main__':
     # text = input('Please enter smth: ')
-    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Бурундук съел бомбу. Пирожок'
+    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Бурундук съел бомбу. Тарань'
     text = greeceficator_consonants(text)
     text = greeceficator_vowels(text)
     print(text)
