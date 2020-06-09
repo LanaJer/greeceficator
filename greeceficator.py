@@ -38,6 +38,12 @@ def get_key_len(x):
 def greeceficator_consonants(text: str):
     """Транслитерация согласных букв с русского на греческий."""
     lower_consonants = [
+        ('б', 'μπ', NO_LETTER, ANY_LETTER),
+        ('д', 'ντ', NO_LETTER, ANY),
+        ('оло', 'ολω', ANY_LETTER, ANY_LETTER),
+        ('ожо', 'οζο', ANY_LETTER, ANY_LETTER),
+        ('иси', 'ιση', ANY_LETTER, ANY_LETTER),
+        ('иро', 'υρο', ANY_LETTER, ANY_LETTER),
         ('мп', 'μπ', ANY_LETTER, ANY_LETTER),
         ('мб', 'μπ', ANY_LETTER, ANY_LETTER),
         ('кс', 'ξ', ANY, ANY),
@@ -49,8 +55,7 @@ def greeceficator_consonants(text: str):
         ('нд', 'ντ', ANY, ANY),
         ('аф', 'αυ', ANY, ANY),
         ('ни', 'νι', ANY, ANY),
-        ('д', 'ντ', NO_LETTER, ANY),
-        ('б',  'μπ', NO_LETTER, ANY_LETTER),
+        ('им', 'ημ', ANY, ANY),
         ('в',  'β', ANY, ANY),
         ('г',  'γ', ANY, ANY),
         ('д',  'δ', ANY, ANY),
@@ -67,9 +72,12 @@ def greeceficator_consonants(text: str):
         ('х',  'χ', ANY, ANY),
 
     ]
-    caps_consonants = [(x[0].capitalize(), x[1].capitalize(), x[2], x[3]) for x in lower_consonants]
 
-    substitutions = [*caps_consonants, *lower_consonants]  # объединяет два списка
+    substitutions = []
+    for row in lower_consonants:
+        caps_row = (row[0].capitalize(), row[1].capitalize(), row[2], row[3])
+        substitutions.append(row)
+        substitutions.append(caps_row)
 
     for rus_char, greek_char, allowed_before, allowed_after in substitutions:
 
@@ -87,17 +95,15 @@ def greeceficator_consonants(text: str):
             # Ограничение по символам до и после
             elif char_before in allowed_before and char_after in allowed_after:
                 text = replace_first(text, rus_char, greek_char)
-            else:
-                break  # Нечего менять - завершаем while и переходим к следующей букве (цикл for)
 
-            index, char_before, char_after = find_with_context(text, rus_char)
+            index, char_before, char_after = find_with_context(text, rus_char, skip_first=index+1)
 
     return text
 
 
 if __name__ == '__main__':
     # text = input('Please enter smth: ')
-    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Бурундук съел бомбу.'
-    text = greeceficator_vowels(text)
+    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Бурундук съел бомбу. Пирожок'
     text = greeceficator_consonants(text)
+    text = greeceficator_vowels(text)
     print(text)

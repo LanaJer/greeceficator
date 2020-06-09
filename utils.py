@@ -1,8 +1,10 @@
-def find_with_context(text: str, search: str):
+def find_with_context(text: str, search: str, skip_first=0):
     """Возвращает индекс, символ до и символ после найденного."""
-    index = text.find(search)
+    index = text[skip_first:].find(search)
     if index == -1:
         return index, '', ''
+
+    index = index + skip_first
     char_before = text[index - 1]
     try:
         char_after = text[index + len(search)]
