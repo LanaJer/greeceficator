@@ -19,7 +19,9 @@ def greeceficator_vowels(text: str):
         'и': 'οι',
         'у': 'ου',
         'я': 'για',
-        'ю':'υ',
+        #'ю':'υ',
+        'ю': 'γιου',
+        'ё': 'γιο',
     }
     caps_vowels = {k.capitalize(): v.capitalize() for k, v in lower_vowels.items()}
 
@@ -38,9 +40,12 @@ def get_key_len(x):
 def greeceficator_consonants(text: str):
     """Транслитерация согласных букв с русского на греческий."""
     lower_consonants = [
-        ('б', 'μπ', NO_LETTER, ANY_LETTER),
-        ('д', 'ντ', NO_LETTER, ANY),
+        ('б', 'μπ', NO_LETTER, ANY),
+        ('г', 'γκ', NO_LETTER, ANY),
         ('о', 'ο', NO_LETTER, ANY),
+        ('ди', 'ντι', ANY, NO_LETTER),  # Τζον Κένεντι
+        ('енне', 'ενε', ANY_LETTER, ANY_LETTER),
+        ('ене', 'ενε', ANY_LETTER, ANY_LETTER),
         ('оло', 'ολω', ANY_LETTER, ANY_LETTER),
         ('ожо', 'οζο', ANY_LETTER, ANY_LETTER),
         ('иси', 'ιση', ANY_LETTER, ANY_LETTER),
@@ -50,13 +55,19 @@ def greeceficator_consonants(text: str):
         ('кс', 'ξ', ANY, ANY),
         ('пс', 'ψ', ANY, ANY),
         ('дз', 'τζ', ANY, ANY),
+        ('дж', 'τζ', ANY, ANY),
+        ('д', 'ντ', NO_LETTER, ANY),
         ('тф', 'θ', ANY, ANY),
         ('ъе', 'γι', ANY, ANY),
-        ('нт', 'ντ', ANY, ANY),
-        ('нд', 'ντ', ANY, ANY),
+        ('нт', 'ντ', ANY_LETTER, ANY),
+        ('нд', 'ντ', ANY_LETTER, ANY),
+        ('нг', 'γκ', ANY_LETTER, ANY),
         ('аф', 'αυ', ANY, ANY),
         ('ни', 'νι', ANY, ANY),
         ('им', 'ημ', ANY, ANY),
+        ('нг', 'γγ', ANY, ANY),
+        ('нх', 'γχ', ANY, ANY),
+        ('он', 'ον', ANY, ANY),
         ('в',  'β', ANY, ANY),
         ('г',  'γ', ANY, ANY),
         ('д',  'δ', ANY, ANY),
@@ -72,7 +83,7 @@ def greeceficator_consonants(text: str):
         ('ф',  'φ', ANY, ANY),
         ('х',  'χ', ANY, ANY),
         ('ч', 'τσ', ANY, ANY),
-
+        ('ц', 'τζ', ANY, ANY),
     ]
 
     substitutions = []
@@ -105,7 +116,7 @@ def greeceficator_consonants(text: str):
 
 if __name__ == '__main__':
     # text = input('Please enter smth: ')
-    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Бурундук съел бомбу. Тарань'
+    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Бурундук съел бомбу. Джон Кеннеди'
     text = greeceficator_consonants(text)
     text = greeceficator_vowels(text)
     print(text)
