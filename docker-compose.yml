@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+
+  lana-greeceficator-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile

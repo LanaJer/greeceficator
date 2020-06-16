@@ -22,3 +22,14 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: wshihadeh/docker-deployment-action@v1
+        name: Deploy to Docker Host
+        with:
+          remote_docker_host: ${{ secrets.DOCKER_HOST }}
+          ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
+          deployment_mode: docker-compose
+          args: up -d
+          docker_prune: 'true'
+          pull_images_first: 'true'
