@@ -23,7 +23,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: djeer/docker-deployment-action@master
+      - uses: wshihadeh/docker-deployment-action@master
         name: Deploy to Docker Host
         with:
           remote_docker_host: ${{ secrets.DOCKER_HOST }}
