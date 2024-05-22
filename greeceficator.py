@@ -78,6 +78,8 @@ def greeceficator_consonants(text: str):
         ('н',  'ν', ANY, ANY),
         ('п',  'π', ANY, ANY),
         ('р',  'ρ', ANY, ANY),
+        ('с', 'ς', ANY, NO_LETTER),  # end of the word
+        ('с', 'σ', ANY, ANY),  # start or middle of the word
         ('с',  'σ', ANY, ANY),
         ('т',  'τ', ANY, ANY),
         ('ф',  'φ', ANY, ANY),
