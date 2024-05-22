@@ -126,15 +126,15 @@ english_to_greek_vowels = {
 }
 
 english_to_greek_consonants = [
-    ('b', 'β', ANY, ANY), ('c', 'κ', ANY, ANY), ('d', 'δ', ANY, ANY),
-    ('f', 'φ', ANY, ANY), ('g', 'γ', ANY, ANY), ('h', 'η', ANY, ANY),
+    ('b', 'β', ANY, ANY), ('c', 'κ', ANY, ANY), ('d', 'ντ', ANY, ANY),
+    ('f', 'φ', ANY, ANY), ('g', 'γ', ANY, ANY), ('h', 'χ', ANY, ANY),
     ('j', 'ζ', ANY, ANY), ('k', 'κ', ANY, ANY), ('l', 'λ', ANY, ANY),
     ('m', 'μ', ANY, ANY), ('n', 'ν', ANY, ANY), ('p', 'π', ANY, ANY),
     ('q', 'κ', ANY, ANY), ('r', 'ρ', ANY, ANY), ('s', 'σ', ANY, ANY),
     ('t', 'τ', ANY, ANY), ('v', 'β', ANY, ANY), ('w', 'ου', ANY, ANY),
     ('x', 'ξ', ANY, ANY), ('y', 'υ', ANY, ANY), ('z', 'ζ', ANY, ANY),
-    ('B', 'Β', ANY, ANY), ('C', 'Κ', ANY, ANY), ('D', 'Δ', ANY, ANY),
-    ('F', 'Φ', ANY, ANY), ('G', 'Γ', ANY, ANY), ('H', 'Η', ANY, ANY),
+    ('B', 'Β', ANY, ANY), ('C', 'Κ', ANY, ANY), ('D', 'ΝΤ', ANY, ANY),
+    ('F', 'Φ', ANY, ANY), ('G', 'Γ', ANY, ANY), ('H', 'Χ', ANY, ANY),
     ('J', 'Ζ', ANY, ANY), ('K', 'Κ', ANY, ANY), ('L', 'Λ', ANY, ANY),
     ('M', 'Μ', ANY, ANY), ('N', 'Ν', ANY, ANY), ('P', 'Π', ANY, ANY),
     ('Q', 'Κ', ANY, ANY), ('R', 'Ρ', ANY, ANY), ('S', 'Σ', ANY, ANY),
