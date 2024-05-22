@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Enable logging
-from greeceficator import greeceficator_vowels, greeceficator_consonants
+from greeceficator import greeceficator_vowels, greeceficator_consonants, greeceficator_english
 
 logging.basicConfig(
     format='%(asctime)s - %(funcName)s - %(levelname)s - %(message)s',
@@ -75,6 +75,7 @@ def lower(update, context):
     logger.info(text)
     text = greeceficator_consonants(text)
     text = greeceficator_vowels(text)
+    text = greeceficator_english(text)
     update.message.reply_text(text.lower())
 
 
