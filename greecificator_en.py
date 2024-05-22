@@ -1,14 +1,20 @@
 # Add English letters to the ANY_LETTER constant
 import re
 
-from constants import ANY
+from constants import ANY, NO_LETTER
 from utils import replace_first, find_with_context
 
 
-english_to_greek_vowels = {
-    'a': 'α', 'e': 'ε', 'i': 'ι', 'o': 'ο', 'u': 'υ',
-    'A': 'Α', 'E': 'Ε', 'I': 'Ι', 'O': 'Ο', 'U': 'Υ'
+english_to_greek_vowels_lower = {
+    'ow': 'αυ',
+    'a': 'α',
+    'e': 'ε',
+    'i': 'ι',
+    'o': 'ο',
+    'u': 'υ',
 }
+english_to_greek_vowels = {**english_to_greek_vowels_lower,
+                           **{k.capitalize(): v.capitalize() for k, v in english_to_greek_vowels_lower.items()}}
 
 english_to_greek_consonants_lower = [
     ('ee', 'οι', ANY, ANY),
@@ -42,6 +48,9 @@ for row in english_to_greek_consonants_lower:
 
 
 def greeceficator_english(text: str):
+    # Specific replacement for 'hi' at the beginning of words
+    text = re.sub(r'\bhi', 'χαϊ', text, flags=re.IGNORECASE)
+
     # Direct replacement for 'oo'
     text = re.sub(r'oo', 'ου', text, flags=re.IGNORECASE)
 
