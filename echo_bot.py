@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Enable logging
-from greeceficator import greeceficator_vowels, greeceficator_consonants, greeceficator_english
+from greeceficator import greeceficator_all_langs
 
 logging.basicConfig(
     format='%(asctime)s - %(funcName)s - %(levelname)s - %(message)s',
@@ -45,8 +45,8 @@ def help(update, context):
     text = (
         "Commands:\n"
         "/help - this message\n"
-        "/caps <текст> - make all caps\n"
-        "/lower <текст> - make all lower\n"
+        "/caps <text> - make all CAPS\n"
+        "/lower <text> - make all lower\n"
     )
     update.message.reply_text(text)
 
@@ -55,8 +55,7 @@ def echo(update, context):
     """Echo the user message."""
     text = update.message.text
     logger.info(text)
-    text = greeceficator_consonants(text)
-    text = greeceficator_vowels(text)
+    text = greeceficator_all_langs(text)
     update.message.reply_text(text)
 
 
@@ -64,8 +63,7 @@ def caps(update, context):
     """Echo the user message."""
     text = update.message.text
     logger.info(text)
-    text = greeceficator_consonants(text)
-    text = greeceficator_vowels(text)
+    text = greeceficator_all_langs(text)
     update.message.reply_text(text.upper())
 
 
@@ -73,9 +71,7 @@ def lower(update, context):
     """Echo the user message."""
     text = update.message.text
     logger.info(text)
-    text = greeceficator_consonants(text)
-    text = greeceficator_vowels(text)
-    text = greeceficator_english(text)
+    text = greeceficator_all_langs(text)
     update.message.reply_text(text.lower())
 
 

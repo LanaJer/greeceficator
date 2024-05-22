@@ -163,10 +163,15 @@ def greeceficator_english(text: str):
     return text
 
 
-if __name__ == '__main__':
-    # text = input('Please enter smth: ')
-    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Бурундук съел бомбу. Джон Кеннеди'
+def greeceficator_all_langs(text: str):
     text = greeceficator_consonants(text)
     text = greeceficator_vowels(text)
     text = greeceficator_english(text)
+    return text
+
+
+if __name__ == '__main__':
+    # text = input('Please enter smth: ')
+    text = 'Яблоко висит на ветке. Кэб приехал в Лондон. Бурундук съел бомбу. Джон Кеннеди'
+    text = greeceficator_all_langs(text)
     print(text)
