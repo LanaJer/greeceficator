@@ -48,9 +48,13 @@ for row in english_to_greek_consonants_lower:
 
 
 def greeceficator_english(text: str):
+    # Replace 'ine' at the end of words with 'ϊν'
+    text = re.sub(r'ine\b', 'αϊν', text, flags=re.IGNORECASE)
+
     # Specific replacement for 'hi' at the beginning of words
     text = re.sub(r'\bHi', 'Χαϊ', text)
     text = re.sub(r'\bhi', 'χαϊ', text, flags=re.IGNORECASE)
+    text = re.sub(r'\bfi', 'φαϊ', text, flags=re.IGNORECASE)
 
     # Direct replacement for 'oo'
     text = re.sub(r'oo', 'ου', text, flags=re.IGNORECASE)
@@ -65,8 +69,7 @@ def greeceficator_english(text: str):
     text = re.sub(r'gio', 'γιο', text, flags=re.IGNORECASE)
     text = re.sub(r'g(?=[iey])', 'τζ', text, flags=re.IGNORECASE)
     text = re.sub(r'g', 'γ', text, flags=re.IGNORECASE)
-    text = re.sub(r'th(?=[^aeiou])', 'θ', text, flags=re.IGNORECASE)
-    text = re.sub(r'th', 'δ', text, flags=re.IGNORECASE)
+    text = re.sub(r'th', 'θ', text, flags=re.IGNORECASE)
     text = re.sub(r'ch', 'κ', text, flags=re.IGNORECASE)
     text = re.sub(r'ph', 'φ', text, flags=re.IGNORECASE)
     text = re.sub(r'sh', 'σ', text, flags=re.IGNORECASE)
