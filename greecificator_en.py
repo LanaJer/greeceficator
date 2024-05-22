@@ -49,6 +49,7 @@ for row in english_to_greek_consonants_lower:
 
 def greeceficator_english(text: str):
     # Specific replacement for 'hi' at the beginning of words
+    text = re.sub(r'\bHi', 'Χαϊ', text)
     text = re.sub(r'\bhi', 'χαϊ', text, flags=re.IGNORECASE)
 
     # Direct replacement for 'oo'
@@ -61,6 +62,7 @@ def greeceficator_english(text: str):
     # Contextual replacements for 'c', 'g', 'th', 'ch', 'ph', 'sh', 'y', 'x'
     text = re.sub(r'c(?=[iey])', 'σ', text, flags=re.IGNORECASE)
     text = re.sub(r'c', 'κ', text, flags=re.IGNORECASE)
+    text = re.sub(r'gio', 'γιο', text, flags=re.IGNORECASE)
     text = re.sub(r'g(?=[iey])', 'τζ', text, flags=re.IGNORECASE)
     text = re.sub(r'g', 'γ', text, flags=re.IGNORECASE)
     text = re.sub(r'th(?=[^aeiou])', 'θ', text, flags=re.IGNORECASE)
