@@ -37,16 +37,16 @@ logger.addHandler(logging.StreamHandler())
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Привет! Напиши мне что-нибудь, а я переведу 😉')
+    update.message.reply_text('Привет! Напиши мне что-нибудь, а я переведу 😉\nHi! Write me something and I will translate it 😉')
 
 
 def help(update, context):
     """Send a message when the command /help is issued."""
     text = (
-        "Команды:\n"
-        "/help - справка\n"
-        "/caps <текст> - все БОЛЬШИМИ буквами\n"
-        "/lower <текст> - все маленькими буквами\n"
+        "Commands:\n"
+        "/help - this message\n"
+        "/caps <текст> - make all caps\n"
+        "/lower <текст> - make all lower\n"
     )
     update.message.reply_text(text)
 
