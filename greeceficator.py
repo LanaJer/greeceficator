@@ -17,4 +17,4 @@ def greeceficator_all_langs(text: str):
 if __name__ == '__main__':
     # text = input('Please enter smth: ')
     print(greeceficator_all_langs('проверка связи'))
-    print(greeceficator_all_langs('Hi, how are you Sergios? Everything is fine?'))
+    print(greeceficator_all_langs('Hi, how are you Sergios? Everything is fine, thanks Giorgos!'))
